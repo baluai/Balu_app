@@ -13,10 +13,7 @@ if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo"
 
 # Cargar el modelo de transcripción de whisper
-model = whisper.load_model("base")
-
-# Ruta de la carpeta de textos
-text_folder = "C:\\Users\\cleme\\Desktop\\Brave up\\Brave up transcripciones\\"
+model = whisper.load_model("small")
 
 # Crea la carpeta de textos si no existe
 if not os.path.exists(text_folder):
@@ -54,7 +51,7 @@ if uploaded_file is not None:
         temp_audio_file.write(uploaded_file.read())
     
     # Realiza la transcripción
-    result = model.transcribe(temp_audio_path, language="es")
+    result = whisper.load_model("small").transcribe(temp_audio_path, language="es")
 
     # Obtén el texto de la transcripción
     transcription_text = result["text"]
