@@ -7,7 +7,7 @@ import tempfile
 
 st.title("BALUAI")
 
-st.title("Verificación de Instalación de Whisper")
+st.title("Verificación de Instalación de Whisperaa")
 
 try:
     st.write(f"Módulo 'whisper' importado correctamente.")
