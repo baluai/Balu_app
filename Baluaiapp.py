@@ -16,6 +16,11 @@ except Exception as e:
     st.error("Error al verificar la instalación de Whisper.")
     st.write(str(e))
 
+if hasattr(whisper, "load_model"):
+    st.write("El objeto 'whisper' tiene el atributo 'model'.")
+else:
+    st.write("El objeto 'whisper' no tiene el atributo 'model'.")
+
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 if "openai_model" not in st.session_state:
