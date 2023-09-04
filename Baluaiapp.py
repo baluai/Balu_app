@@ -13,7 +13,7 @@ if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo"
 
 # Cargar el modelo de transcripción de whisper
-model = whisper.load_model("small")
+model = whisper.load_model("base")
 
 # Crea la carpeta de textos si no existe
 if not os.path.exists(text_folder):
