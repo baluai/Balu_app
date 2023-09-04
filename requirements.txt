@@ -1,4 +1,5 @@
 git+https://github.com/openai/whisper.git
+whisper
 openai
 streamlit
 ffmpeg
