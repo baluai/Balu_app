@@ -1,4 +1,4 @@
-git+https://github.com/openai/whisper.git
+git+https://github.com/openai/whisper/tree/main
 whisper
 openai
 streamlit
