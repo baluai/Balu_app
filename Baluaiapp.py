@@ -10,8 +10,8 @@ st.title("BALUAI")
 st.title("Verificación de Instalación de Whisper")
 
 try:
-    whisper_version = whisper.__version__
-    st.write(f"Versión de Whisper instalada: {whisper_version}")
+    st.write(f"Módulo 'whisper' importado correctamente.")
+    st.write(f"Directorio del módulo: {whisper.__file__}")
 except Exception as e:
     st.error("Error al verificar la instalación de Whisper.")
     st.write(str(e))
