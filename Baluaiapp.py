@@ -7,27 +7,10 @@ import tempfile
 
 st.title("BALUAI")
 
-st.title("Verificación de Instalación de Whisperaa")
-
-try:
-    st.write(f"Módulo 'whisper' importado correctamente.")
-    st.write(f"Directorio del módulo: {whisper.__file__}")
-except Exception as e:
-    st.error("Error al verificar la instalación de Whisper.")
-    st.write(str(e))
-
-if hasattr(whisper, "load_model"):
-    st.write("El objeto 'whisper' tiene el atributo 'model'.")
-else:
-    st.write("El objeto 'whisper' no tiene el atributo 'model'.")
-
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo"
-
-# Cargar el modelo de transcripción de whisper
-model = whisper.load_model("small")
 
 # Subir archivo de audio
 uploaded_file = st.file_uploader("Sube un archivo de audio (mp3 o wav)", type=["mp3", "wav"])
@@ -57,7 +40,7 @@ if uploaded_file is not None:
     with st.spinner("Transcribiendo... ⏳ _Demora entre 20 y 40% de la diración del audio_"):
         
         # Realiza la transcripción
-        result = model.transcribe(temp_audio_path, language="es")
+        result = whisper.transcribe(temp_audio_path, language="es")
 
         # Obtén el texto de la transcripción
         transcription_text = result["text"]
