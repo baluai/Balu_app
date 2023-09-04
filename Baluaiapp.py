@@ -7,6 +7,15 @@ import tempfile
 
 st.title("BALUAI")
 
+st.title("Verificación de Instalación de Whisper")
+
+try:
+    whisper_version = whisper.__version__
+    st.write(f"Versión de Whisper instalada: {whisper_version}")
+except Exception as e:
+    st.error("Error al verificar la instalación de Whisper.")
+    st.write(str(e))
+
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 if "openai_model" not in st.session_state:
