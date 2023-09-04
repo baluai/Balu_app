@@ -3,7 +3,7 @@ import streamlit as st
 import whisper
 import os
 import time
-
+import tempfile
 
 st.title("BALUAI")
 
@@ -13,11 +13,7 @@ if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo"
 
 # Cargar el modelo de transcripción de whisper
-whisper.load_model("small")
-
-# Crea la carpeta de textos si no existe
-if not os.path.exists(text_folder):
-    os.makedirs(text_folder)
+model = whisper.load_model("small")
 
 # Subir archivo de audio
 uploaded_file = st.file_uploader("Sube un archivo de audio (mp3 o wav)", type=["mp3", "wav"])
@@ -38,25 +34,21 @@ st.chat_message("assistant").write("Sube tu archivos aqui")
 
 if uploaded_file is not None:
 
- with st.spinner("Transcribiendo... ⏳ _Demora entre 20 y 40% de la diración del audio_"):
+    # Crea un archivo temporal
+    temp_audio_file = tempfile.NamedTemporaryFile(delete=False)
+    temp_audio_path = temp_audio_file.name
+    temp_audio_file.write(uploaded_file.read())
+    temp_audio_file.close()
+
+    with st.spinner("Transcribiendo... ⏳ _Demora entre 20 y 40% de la diración del audio_"):
         
-    # Obtén el nombre del archivo sin extensión
-    audio_filename = os.path.splitext(uploaded_file.name)[0]
+        # Realiza la transcripción
+        result = model.transcribe(temp_audio_path, language="es")
 
-    # Ruta para guardar el archivo de audio temporalmente
-    temp_audio_path = os.path.join(text_folder, audio_filename + "_temp.wav")
-    
-    # Guarda el archivo de audio temporalmente
-    with open(temp_audio_path, "wb") as temp_audio_file:
-        temp_audio_file.write(uploaded_file.read())
-    
-    # Realiza la transcripción
-    result = whisper.load_model("small").transcribe(temp_audio_path, language="es")
+        # Obtén el texto de la transcripción
+        transcription_text = result["text"]
 
-    # Obtén el texto de la transcripción
-    transcription_text = result["text"]
-
-# Mostrar mensaje de transcripción exitosa en el chat
+    # Mostrar mensaje de transcripción exitosa en el chat
     st.chat_message("assistant").write("Transcripción exitosa! ✅")
 
 # Mostrar las primeras 25 palabras de la transcripción en el chat
