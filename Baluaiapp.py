@@ -1,13 +1,13 @@
- import openai
+import openai
 import streamlit as st
 import whisper
 import os
 import time
-from config import OPENAI_API_KEY
+
 
 st.title("BALUAI")
 
-openai.api_key = OPENAI_API_KEY
+openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo"
