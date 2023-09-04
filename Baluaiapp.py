@@ -12,8 +12,6 @@ openai.api_key = os.environ.get("OPENAI_API_KEY")
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo"
 
-# Cargar el modelo de transcripción de whisper
-model = whisper.load_model("small")
 
 # Ruta de la carpeta de textos
 text_folder = "C:\\Users\\cleme\\Desktop\\Brave up\\Brave up transcripciones\\"
