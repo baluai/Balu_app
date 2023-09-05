@@ -1,6 +1,6 @@
 import openai
 import streamlit as st
-import openaiwhisper
+import whisper
 import os
 import time
 import tempfile
