@@ -49,7 +49,7 @@ if uploaded_file is not None:
     with st.spinner("Transcribiendo... ⏳ _Demora entre 20 y 40% de la diración del audio_"):
         
         # Realiza la transcripción
-        result = whisper.transcribe(temp_audio_path, language="es")
+        result = model.transcribe(temp_audio_path, language="es")
 
         # Obtén el texto de la transcripción
         transcription_text = result["text"]
