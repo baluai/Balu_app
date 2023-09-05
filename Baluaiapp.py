@@ -47,9 +47,11 @@ if uploaded_file is not None:
     temp_audio_file.close()
 
     with st.spinner("Transcribiendo... ⏳ _Demora entre 20 y 40% de la diración del audio_"):
+
+        _, probs = model.detect_language(mel)
         
         # Realiza la transcripción
-        result = model.transcribe(temp_audio_path, language="es")
+        result = model.transcribe(temp_audio_path) #, language="es")
 
         # Obtén el texto de la transcripción
         transcription_text = result["text"]
