@@ -21,6 +21,9 @@ openai.api_key = os.environ.get("OPENAI_API_KEY")
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo"
 
+# Cargar el modelo de transcripción de whisper
+model = whisper.load_model("small")
+
 # Subir archivo de audio
 uploaded_file = st.file_uploader("Sube un archivo de audio (mp3 o wav)", type=["mp3", "wav"])
 
