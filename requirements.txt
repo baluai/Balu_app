@@ -3,11 +3,9 @@ openai
 streamlit
 torch
 moviepy
-# ffmpeg
 ffmpeg-python
 setuptools-rust
 tiktoken==0.3.3
-# ffmpeg-python==0.2.0
 datetime
 pandas
 pyperclip
